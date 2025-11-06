@@ -1,0 +1,37 @@
+{% extends "quotes/base.html" %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'quotes_app:quote' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Quote:</label>
+        {{ form.quote }}
+        <span>{{ form.errors.quote }}</span>
+    </div>
+
+    <div style="padding: 10px">
+        <label for="exampleDataList" class="form-label">Author</label>
+        <input class="form-control" name="author" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+        <datalist id="datalistOptions">
+            {% for author in authors %}
+            <option value="{{author.fullname}}">{{author.fullname}}</option>
+            {% endfor %}
+        </datalist>
+        <span>{{ form.errors.author }}</span>
+    </div>
+    <div style="padding: 10px">
+        <label> Select tags:
+            <select class="form-select"  name="tags" multiple aria-label="Multiple select example">
+                {% for tag in tags %}
+                <option value="{{tag.name}}">{{tag.name}}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </div>
+    <div class="grid">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+</form>
+{% endblock %}

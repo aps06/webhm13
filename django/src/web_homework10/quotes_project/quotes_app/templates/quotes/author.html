@@ -1,0 +1,32 @@
+{% extends "quotes/base.html" %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'quotes_app:author' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Fullname:</label>
+        {{ form.fullname }}
+        <span>{{ form.errors.fullname }}</span>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Born date:</label>
+        {{ form.born_date }}
+        <span>{{ form.errors.born_date }}</span>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Born location:</label>
+        {{ form.born_location }}
+        <span>{{ form.errors.born_location }}</span>
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
+        {{ form.description }}
+        <span>{{ form.errors.description }}</span>
+    </div>
+    <div class="grid">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+</form>
+{% endblock %}
